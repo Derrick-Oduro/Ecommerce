@@ -63,6 +63,7 @@ const HomePage = () => {
       {/* Footer Section */}
       <footer className="footer">
         <p>&copy; 2024 EPICART. All Rights Reserved.</p>
+
       </footer>
     </div>
   );
