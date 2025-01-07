@@ -1,19 +1,19 @@
-require('dotenv').config();
 const express = require('express');
-const sequelize = require('./Config/database');
-const userRoutes = require('./routes/userRoutes');
-const productRoutes = require('./routes/productRoutes');
-const cartRoutes = require('./routes/cartRoutes');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const database = require('./Config/database');
 
 const app = express();
-app.use(express.json());
+app.use(cors());
+app.use(bodyParser.json());
 
-// API Routes
-app.use('/api/users', userRoutes);
-app.use('/api/products', productRoutes);
-app.use('/api/cart', cartRoutes);
+// Test route
+app.get('/', (req, res) => {
+    res.send('API is running...');
+});
 
-// Sync models and start the server
-sequelize.sync().then(() => {
-  app.listen(5000, () => console.log('Server running on port 5000'));
+// Start the server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
