@@ -1,19 +1,47 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+const connection = require('./Config/database');
 const cors = require('cors');
-const database = require('./Config/database');
-
 const app = express();
-app.use(cors());
-app.use(bodyParser.json());
+const port = 3001;
 
-// Test route
-app.get('/', (req, res) => {
-    res.send('API is running...');
+app.use(express.json());
+app.use(cors());
+
+// Signup endpoint
+app.post('/signup', (req, res) => {
+    const { username, password } = req.body;
+    const hashedPassword = bcrypt.hashSync(password, 10);
+    const sql = 'INSERT INTO users (username, password) VALUES (?, ?)';
+
+    connection.query(sql, [username, hashedPassword], (err, results) => {
+        if (err) {
+            res.status(500).send('Error signing up');
+        } else {
+            res.status(201).send('User signed up successfully');
+        }
+    });
 });
 
-// Start the server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+// Login endpoint
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    const sql = 'SELECT * FROM users WHERE username = ?';
+
+    connection.query(sql, [username], (err, results) => {
+        if (err || results.length === 0) {
+            return res.status(401).send('Invalid username or password');
+        }
+
+        const user = results[0];
+        if (bcrypt.compareSync(password, user.password)) {
+            res.status(200).send('Login successful');
+        } else {
+            res.status(401).send('Invalid username or password');
+        }
+    });
+});
+
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
 });
