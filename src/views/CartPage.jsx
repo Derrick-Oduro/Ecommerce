@@ -27,7 +27,7 @@ const CartPage = () => {
               </div>
               <button
                 onClick={() => handleRemove(item.cartItemId)}
-                className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                className="px-4 py-2 bg-black text-white rounded-md hover:bg-red-600"
               >
                 Remove
               </button>

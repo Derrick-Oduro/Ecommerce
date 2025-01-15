@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom"; // Import Link from react-router-dom
+
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
+const navigate = useNavigate();  
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the form from refreshing the page
@@ -21,6 +25,7 @@ const SignIn = () => {
         const data = await response.json();
         console.log("Login successful:", data);
         // Redirect to another page or update UI here
+        navigate("/HomePage");
       } else {
         const errorData = await response.json();
         console.error("Login failed:", errorData.message);
@@ -38,6 +43,9 @@ const SignIn = () => {
         <div className="w-full max-w-xs">
           <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
+             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                 Log In
+             </h2>
               <input
                 type="email"
                 placeholder="Email"
@@ -60,7 +68,7 @@ const SignIn = () => {
             <div className="flex items-center justify-between">
               <button
                 type="submit"
-                className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="w-full bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
                 Sign In
               </button>
@@ -71,7 +79,7 @@ const SignIn = () => {
           <div className="text-center">
             <p className="text-sm">
               Don't have an account?{" "}
-              <Link to="/signup" className="text-blue-500 hover:text-blue-700">
+              <Link to="/signup" className="text-black hover:text-blue-700">
                 Sign Up
               </Link>
             </p>
