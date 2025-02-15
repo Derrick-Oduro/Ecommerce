@@ -4,7 +4,8 @@
 
 E-COMMERCE WEBSITE
 EPICART
-
+GROUP 8
+\ecommerce-website\public\image\Group 8.jpg
 STEPS
 Frontend: React  
 Backend: Node.js, Express, MySQL

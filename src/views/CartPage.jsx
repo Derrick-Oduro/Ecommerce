@@ -173,7 +173,7 @@ const CartPage = () => {
             <p className="text-lg font-semibold">{statusMessage}</p>
             <button
               onClick={() => setStatusMessage("")}
-              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              className="mt-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-300"
             >
               OK
             </button>

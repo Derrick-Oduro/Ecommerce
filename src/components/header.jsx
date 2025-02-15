@@ -15,7 +15,7 @@ const Header = () => {
         <img 
           src="\shopping-cart.png" 
           alt="Logo" 
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 w-10 h-10 opacity-30" 
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 w-10 h-10 opacity-40" 
         />
         <Link to="/HomePage" className="relative">EPICART</Link>
       </div>
